@@ -25,7 +25,6 @@
 		top: 0;
 		width: 100vw;
 		height: 100vh;
-		border: 1px solid red;
 		overflow: none;
 	}
 </style>

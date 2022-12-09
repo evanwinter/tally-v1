@@ -2,8 +2,8 @@
 	import { onMount } from 'svelte';
 
 	const games = [
-		{ name: 'Tic Tac Toe', id: 'tictactoe' },
-		{ name: 'Connect Four', id: 'connectfour' },
+		{ name: 'Settlers of Catan', id: 'settlersofcatan' },
+		{ name: 'Gin Rummy', id: 'ginrummy' },
 		{ name: 'Chess', id: 'chess' },
 		{ name: 'Checkers', id: 'checkers' },
 		{ name: 'Go', id: 'go' },
@@ -26,7 +26,7 @@
 <div class="screen">
 	<main class="flush-y">
 		<header>
-			<h1 class="display mt-none">Select a game</h1>
+			<h1 class="display mt-none">What did you play?</h1>
 
 			<div class="my-md">
 				<label class="sr-only" for="search">Search</label>
@@ -43,6 +43,7 @@
 		</header>
 
 		<div>
+			<h2>Recently Played</h2>
 			<ul class="games scroll-x">
 				{#each games as game}
 					<li>
