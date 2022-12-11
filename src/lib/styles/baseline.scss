@@ -77,6 +77,28 @@ input {
 		color: var(--color-white);
 		border-color: var(--color-white);
 	}
+
+	// Square variant
+	&.square {
+		--tile-size: calc(100vw / 1.5);
+		position: relative;
+		width: var(--tile-size);
+		height: var(--tile-size);
+		padding: var(--space-xs);
+		display: flex;
+		align-items: flex-end;
+		line-height: 1;
+
+		&.selected {
+			background-color: var(--color-white);
+			color: var(--color-black);
+		}
+
+		@media (min-width: 768px) {
+			font-size: 2rem;
+			--tile-size: 300px;
+		}
+	}
 }
 
 input[type='text'],
