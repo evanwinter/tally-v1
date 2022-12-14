@@ -1,26 +1,145 @@
 @font-face {
-	font-family: 'SuisseIntl';
-	src: url('/fonts/SuisseIntl-Regular-WebS.woff2') format('woff2'),
-		url('/fonts/SuisseIntl-Regular-WebS.woff') format('woff');
+  font-family: 'Aeonik Air';
+  src: url('/fonts/Aeonik-Air.woff2') format('woff2'),
+    url('/fonts/Aeonik-Air.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-	font-family: 'SuisseIntl';
-	font-weight: 600;
-	src: url('/fonts/SuisseIntl-SemiBold-WebXL.woff2') format('woff2'),
-		url('/fonts/SuisseIntl-SemiBold-WebXL.woff') format('woff');
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Black.woff2') format('woff2'),
+    url('/fonts/Aeonik-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-BoldItalic.woff2') format('woff2'),
+    url('/fonts/Aeonik-BoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik Air';
+  src: url('/fonts/Aeonik-AirItalic.woff2') format('woff2'),
+    url('/fonts/Aeonik-AirItalic.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Bold.woff2') format('woff2'),
+    url('/fonts/Aeonik-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-BlackItalic.woff2') format('woff2'),
+    url('/fonts/Aeonik-BlackItalic.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Thin.woff2') format('woff2'),
+    url('/fonts/Aeonik-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-RegularItalic.woff2') format('woff2'),
+    url('/fonts/Aeonik-RegularItalic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-MediumItalic.woff2') format('woff2'),
+    url('/fonts/Aeonik-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-LightItalic.woff2') format('woff2'),
+    url('/fonts/Aeonik-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-ThinItalic.woff2') format('woff2'),
+    url('/fonts/Aeonik-ThinItalic.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Light.woff2') format('woff2'),
+    url('/fonts/Aeonik-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Medium.woff2') format('woff2'),
+    url('/fonts/Aeonik-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Regular.woff2') format('woff2'),
+    url('/fonts/Aeonik-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: 16px;
 }
 
 h1,
 h2,
 h3 {
-	font-weight: lighter;
+  font-weight: 400;
 }
 
 h1 {
-	&.display {
-		font-size: min(10vw, 6rem);
-		letter-spacing: -0.01em;
-		line-height: 1;
-	}
+  &.display {
+    font-size: min(10vw, 6rem);
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
 }

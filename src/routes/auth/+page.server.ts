@@ -3,10 +3,10 @@ import { redirect } from '@sveltejs/kit';
 import type { ServerLoad } from '@sveltejs/kit';
 
 export const load: ServerLoad = async (event) => {
-	const session = await getServerSession(event);
-	if (session?.user) {
-		throw redirect(302, '/app/game');
-	}
+  const session = await getServerSession(event);
+  if (session?.user) {
+    throw redirect(302, '/app/game');
+  }
 
-	return {};
+  return {};
 };

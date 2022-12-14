@@ -1,13 +1,13 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import { supabase } from '$lib/db/supabaseClient';
 
-	export let session;
+	export let session: any;
 
 	let loading = false;
-	let username = null;
-	let website = null;
-	let avatarUrl = null;
+	let username: string = '';
+	let website: string = '';
+	let avatarUrl: string = '';
 
 	onMount(() => {
 		getProfile();
@@ -53,7 +53,11 @@
 				updated_at: new Date()
 			};
 
+      console.log(updates);
+
 			let { error } = await supabase.from('profiles').upsert(updates);
+
+      console.log(error);
 
 			if (error) throw error;
 		} catch (error) {

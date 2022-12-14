@@ -21,12 +21,14 @@
 	});
 </script>
 
-<div>
-	<slot />
+<div class="screen">
+	<div>
+		<slot />
+	</div>
 </div>
 
 <style>
-	div {
+	.screen {
 		position: fixed;
 		top: 0;
 		width: 100vw;
