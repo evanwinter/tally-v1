@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { supabase } from '$lib/db/supabaseClient';
+	import type { AuthSession } from '@supabase/supabase-js';
 
-	export let session: any;
+	export let session: AuthSession;
 
 	let loading = false;
 	let username: string = '';
@@ -53,11 +54,9 @@
 				updated_at: new Date()
 			};
 
-      console.log(updates);
-
 			let { error } = await supabase.from('profiles').upsert(updates);
 
-      console.log(error);
+			console.log(error);
 
 			if (error) throw error;
 		} catch (error) {

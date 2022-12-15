@@ -1,23 +1,17 @@
-<script>
+<script lang="ts">
 	import { supabase } from '$lib/db/supabaseClient';
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import { match as _match } from '$lib/stores/match.ts';
 	import '$lib/styles/index.scss';
 
 	onMount(() => {
 		const {
 			data: { subscription }
 		} = supabase.auth.onAuthStateChange(() => {
-			supabase.invalidate();
+			invalidate('supabase:auth');
 		});
 
 		return () => subscription.unsubscribe();
-	});
-
-	// Listen for changes to the match store and log the outcome
-	_match.subscribe((value) => {
-		console.log('match store changed to', value);
 	});
 </script>
 
