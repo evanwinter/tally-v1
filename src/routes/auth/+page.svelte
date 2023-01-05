@@ -1,4 +1,5 @@
 <script>
+	import Button from '$lib/components/Button.svelte';
 	import { supabase } from '$lib/db/supabaseClient';
 
 	let loading = false;
@@ -28,11 +29,8 @@
 		<input class="inputField" type="email" placeholder="Your email" bind:value={email} />
 	</div>
 	<div>
-		<input
-			type="submit"
-			class="button mt-sm"
-			value={loading ? 'Loading' : 'Send Login link'}
-			disabled={loading}
-		/>
+		<Button classes="mt-sm" onClick={handleLogin} disabled={loading}>
+			{loading ? 'Loading' : 'Send Login Link'}
+		</Button>
 	</div>
 </form>

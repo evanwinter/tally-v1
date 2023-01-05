@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { match } from '$lib/stores/match';
 	import { supabase } from '$lib/db/supabaseClient';
+	import Button from '$lib/components/Button.svelte';
 
 	export let session: any;
 
@@ -36,8 +37,13 @@
 		newGame = '';
 	}
 
-	function addPlayer(name: string) {
-		players = [...players, name];
+	function togglePlayer(name: string) {
+		if (players.includes(name)) {
+			players = players.filter((player) => player !== name);
+		} else {
+			players = [...players, name];
+		}
+
 		newPlayer = '';
 	}
 
@@ -50,7 +56,7 @@
 		if (user) {
 			const { data } = await supabase
 				.from('profiles')
-				.select(`username`)
+				.select('username')
 				.eq('id', session.user.id)
 				.single();
 			if (data) {
@@ -85,24 +91,25 @@
 		{#if game}
 			with
 
-			{#if players.length > 0}
+			<span>
+				<input type="text" bind:value={newPlayer} />
+				{#if newPlayer}
+					<button class="button new-button">+</button>
+				{:else}
+					<span class="suggested">
+						{#each recentPlayers as recentPlayer}
+							<Button onClick={() => togglePlayer(recentPlayer.name)}>
+								{recentPlayer.name}
+							</Button>
+						{/each}
+					</span>
+				{/if}
+			</span>
+
+			<!-- {#if players.length > 0}
 				<span class="players">{listPlayers()}</span>
 			{:else}
-				<span>
-					<input type="text" bind:value={newPlayer} />
-					{#if newPlayer}
-						<button class="button new-button">+</button>
-					{:else}
-						<span class="suggested">
-							{#each recentPlayers as recentPlayer}
-								<button class="button" on:click={() => addPlayer(recentPlayer.name)}>
-									{recentPlayer.name}
-								</button>
-							{/each}
-						</span>
-					{/if}
-				</span>
-			{/if}
+			{/if} -->
 		{/if}
 
 		{#if players.length > 0}
@@ -120,13 +127,13 @@
 				<div style="width: 100%; position: relative;">
 					<input type="text" bind:value={newWinner} />
 					<span class="suggested">
-						<button class="button" on:click={() => (winner = currentPlayer)}>
+						<Button onClick={() => (winner = currentPlayer)}>
 							I ({currentPlayer})
-						</button>
+						</Button>
 						{#each players as player}
-							<button class="button" on:click={() => (winner = player)}>
+							<Button onClick={() => (winner = player)}>
 								{player}
-							</button>
+							</Button>
 						{/each}
 					</span>
 				</div>
@@ -137,19 +144,10 @@
 
 	{#if game && players.length > 0 && winner}
 		<div class="mt-xl">
-			<button
-				class="button primary mr-sm"
-				on:click={() => {
-					console.log('Saving match', $match);
-				}}>Save</button
-			>
-			<button
-				class="button"
-				on:click={() => {
-					console.log('Editing match', $match);
-					winner = '';
-				}}>Edit</button
-			>
+			<Button classes="primary mr-sm" onClick={() => console.log('Saving match', $match)}>
+				Save
+			</Button>
+			<Button onClick={() => (winner = '')}>Edit</Button>
 		</div>
 	{/if}
 </div>
