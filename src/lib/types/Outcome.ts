@@ -1,5 +1,7 @@
+import type { Player } from './Player';
+
 export interface Outcome {
-	winner?: string;
+	winner: Player | null;
 	scores?: {
 		[player: string]: number;
 	};

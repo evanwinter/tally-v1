@@ -1,14 +1,21 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { supabase } from '$lib/db/supabaseClient';
 	import type { AuthSession } from '@supabase/supabase-js';
+	import Button from '$lib/components/Button.svelte';
+	import { getUser, supabase } from '$lib/db';
 
 	export let session: AuthSession;
 
-	let loading = false;
-	let username: string = '';
-	let website: string = '';
-	let avatarUrl: string = '';
+	const formData = {
+		username: '',
+		avatarUrl: '',
+		fullName: ''
+	};
+
+	const formState = {
+		loading: false,
+		error: ''
+	};
 
 	onMount(() => {
 		getProfile();
@@ -16,61 +23,54 @@
 
 	const getProfile = async () => {
 		try {
-			loading = true;
-			const { user } = session;
+			console.log('Here?');
+			formState.loading = true;
 
-			const { data, error, status } = await supabase
-				.from('profiles')
-				.select(`username, website, avatar_url`)
-				.eq('id', user.id)
-				.single();
+			const data = await getUser(session.user.id);
 
 			if (data) {
-				username = data.username;
-				website = data.website;
-				avatarUrl = data.avatar_url;
+				formData.username = data.username;
+				formData.avatarUrl = data.avatar_url;
+				formData.fullName = data.full_name;
 			}
 
-			if (error && status !== 406) throw error;
+			// if (error && status !== 406) throw error;
 		} catch (error) {
 			if (error instanceof Error) {
-				alert(error.message);
+				formState.error = error.message;
 			}
 		} finally {
-			loading = false;
+			formState.loading = false;
 		}
 	};
 
 	async function updateProfile() {
 		try {
-			loading = true;
-			const { user } = session;
+			formState.loading = true;
 
 			const updates = {
-				id: user.id,
-				username,
-				website,
-				avatar_url: avatarUrl,
+				id: session.user.id,
+				username: formData.username,
+				avatar_url: formData.avatarUrl,
+				full_name: formData.fullName,
 				updated_at: new Date()
 			};
 
 			let { error } = await supabase.from('profiles').upsert(updates);
 
-			console.log(error);
-
 			if (error) throw error;
 		} catch (error) {
 			if (error instanceof Error) {
-				alert(error.message);
+				formState.error = error.message;
 			}
 		} finally {
-			loading = false;
+			formState.loading = false;
 		}
 	}
 
 	async function signOut() {
 		try {
-			loading = true;
+			formState.loading = true;
 			let { error } = await supabase.auth.signOut();
 			if (error) throw error;
 		} catch (error) {
@@ -78,35 +78,34 @@
 				alert(error.message);
 			}
 		} finally {
-			loading = false;
+			formState.loading = false;
 		}
+	}
+
+	function clearError() {
+		formState.error = '';
 	}
 </script>
 
-<form on:submit|preventDefault={updateProfile}>
-	<div>
+<form class="p-sm" on:change={clearError} on:submit|preventDefault={updateProfile}>
+	{#if formState.error}
+		<div class="border br-sm p-sm color-error">{formState.error}</div>
+	{/if}
+
+	<div class="my-sm">
+		<label for="full_name">Full Name</label>
+		<input id="full_name" type="text" bind:value={formData.fullName} />
+	</div>
+	<div class="my-sm">
+		<label for="username">Username</label>
+		<input id="username" type="text" bind:value={formData.username} />
+	</div>
+	<div class="my-sm">
 		<label for="email">Email</label>
 		<input id="email" type="text" value={session.user.email} disabled />
 	</div>
-	<div>
-		<label for="username">Name</label>
-		<input id="username" type="text" bind:value={username} />
-	</div>
-	<div>
-		<label for="website">Website</label>
-		<input id="website" type="website" bind:value={website} />
-	</div>
-
-	<div>
-		<input
-			type="submit"
-			class="button"
-			value={loading ? 'Loading...' : 'Update'}
-			disabled={loading}
-		/>
-	</div>
-
-	<div>
-		<button class="button" on:click={signOut} disabled={loading}>Sign Out</button>
+	<div class="mt-md">
+		<Button onClick={updateProfile} disabled={formState.loading}>Save</Button>
+		<Button onClick={signOut} disabled={formState.loading}>Sign Out</Button>
 	</div>
 </form>

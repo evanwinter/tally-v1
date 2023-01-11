@@ -1,0 +1,143 @@
+.flush-y {
+	> *:first-child {
+		margin-top: 0;
+	}
+
+	> *:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.mw-sm {
+	width: 100%;
+	max-width: min(100vw, 480px);
+	margin-inline: auto;
+}
+
+.mw-md {
+	width: min(100vw, 768px);
+	margin-inline: auto;
+}
+
+.mw-lg {
+	width: min(100vw, 1024px);
+	margin-inline: auto;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.flex {
+	display: flex;
+
+	&.column {
+		flex-direction: column;
+	}
+
+	&.align-center {
+		align-items: center;
+	}
+
+	&.align-start {
+		align-items: flex-start;
+	}
+
+	&.align-end {
+		align-items: flex-end;
+	}
+
+	&.justify-center {
+		justify-content: center;
+	}
+
+	&.justify-start {
+		justify-content: flex-start;
+	}
+
+	&.justify-end {
+		justify-content: flex-end;
+	}
+
+	&.justify-between {
+		justify-content: space-between;
+	}
+
+	&.justify-around {
+		justify-content: space-around;
+	}
+
+	@each $key, $value in $spaces {
+		&.gap-#{$key} {
+			gap: var(--space-#{$key});
+		}
+	}
+}
+
+.border {
+	border: 1px solid currentColor;
+}
+
+.border-top {
+	border-top: 1px solid currentColor;
+}
+
+.border-bottom {
+	border-bottom: 1px solid currentColor;
+}
+
+.br-sm {
+	border-radius: var(--border-radius);
+}
+
+.br-md {
+	border-radius: calc(var(--border-radius) * 2);
+}
+
+.br-lg {
+	border-radius: calc(var(--border-radius) * 4);
+}
+
+@each $key, $value in $colors {
+	.bg-#{$key} {
+		background-color: var(--color-#{$key});
+	}
+	.color-#{$key} {
+		color: var(--color-#{$key});
+	}
+}
+
+.circle {
+	border-radius: 50%;
+	height: 1em;
+	width: 1em;
+}
+
+.active {
+	// filter: drop-shadow(0 0 0.5rem var(--color-black-25));
+	// position: relative;
+	// &::after {
+	// 	content: '';
+	// 	display: block;
+	// 	width: 0.5em;
+	// 	height: 0.5em;
+	// 	border-radius: 50%;
+	// 	background-color: var(--color-success);
+	// 	position: absolute;
+	// 	bottom: -1rem;
+	//   left: 50%;
+	//   transform: translateX(-50%);
+	// }
+}

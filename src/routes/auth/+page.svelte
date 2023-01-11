@@ -1,6 +1,6 @@
 <script>
 	import Button from '$lib/components/Button.svelte';
-	import { supabase } from '$lib/db/supabaseClient';
+	import { supabase } from '$lib/db';
 
 	let loading = false;
 	let email = '';
@@ -26,7 +26,7 @@
 
 <form on:submit|preventDefault={handleLogin}>
 	<div>
-		<input class="inputField" type="email" placeholder="Your email" bind:value={email} />
+		<input type="email" placeholder="Your email" bind:value={email} />
 	</div>
 	<div>
 		<Button classes="mt-sm" onClick={handleLogin} disabled={loading}>

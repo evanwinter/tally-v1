@@ -1,5 +1,5 @@
 <script>
-	import { supabase } from '$lib/db/supabaseClient';
+	import { supabase } from '$lib/db';
 
 	let loading = false;
 	let email = '';

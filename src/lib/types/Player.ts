@@ -6,8 +6,9 @@ export interface AnonymousPlayer {
 
 export interface Player {
 	id: string;
-	display_name: string;
-	full_name: string;
-	username: string;
-	friends: [];
+  name?: string;
+	display_name?: string;
+	full_name?: string;
+	username?: string;
+	friends?: [];
 }

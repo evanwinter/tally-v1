@@ -29,7 +29,9 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@evanwinter/styles": "^1.0.0",
 		"@supabase/auth-helpers-sveltekit": "^0.8.6",
-		"@supabase/supabase-js": "^2.1.1"
+		"@supabase/supabase-js": "^2.2.3",
+		"svelte-local-storage-store": "^0.3.2"
 	}
 }
